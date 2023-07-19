@@ -1,0 +1,8 @@
+fastapi[all]
+SQLAlchemy
+pydantic[email]
+asyncpg
+psycopg2-binary
+alembic
+pytest
+pytest-asyncio
