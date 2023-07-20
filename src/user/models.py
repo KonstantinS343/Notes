@@ -1,31 +1,32 @@
 from sqlalchemy import String, Integer, TIMESTAMP, ForeignKey, Boolean,\
-    Column, Table, JSON, MetaData
+    Column, JSON
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.ext.declarative import declarative_base
 
 import uuid
 from datetime import datetime
 
-metadata = MetaData()
+
+Base = declarative_base()
 
 
-roles = Table(
-    'roles',
-    metadata,
-    Column('id', Integer, primary_key=True),
-    Column('name', String, nullable=False),
-    Column('permissions', JSON)
-)
+class Role(Base):
+    __tablename__ = 'roles'
 
-users = Table(
-    'users',
-    metadata,
-    Column('id', UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
-    Column('username', String, nullable=False, unique=True),
-    Column('first_name', String, nullable=False),
-    Column('second_name', String),
-    Column('email', String, nullable=False, unique=True),
-    Column('is_active', Boolean, default=True),
-    Column('password', String, nullable=False),
-    Column('registered_at', TIMESTAMP, default=datetime.utcnow),
-    Column('roles_id', Integer, ForeignKey('roles.id'))
-)
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    permissions = Column(JSON)
+
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    username = Column(String, nullable=False, unique=True)
+    first_name = Column(String, nullable=False)
+    second_name = Column(String)
+    email = Column(String, nullable=False, unique=True)
+    is_active = Column(Boolean, default=True)
+    password = Column(String, nullable=False)
+    registered_at = Column(TIMESTAMP, default=datetime.utcnow)
+    roles_id = Column(Integer, ForeignKey('roles.id'))
