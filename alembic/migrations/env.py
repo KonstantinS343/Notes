@@ -30,8 +30,8 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from src.database.user.models import metadata as user_metadata
-from src.database.task.models import metadata as task_metadata
+from src.user.models import metadata as user_metadata
+from src.task.models import metadata as task_metadata
 target_metadata = [user_metadata, task_metadata]
 
 # other values from the config, defined by the needs of env.py,

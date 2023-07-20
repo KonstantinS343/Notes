@@ -1,8 +1,10 @@
-from sqlalchemy import Table, Column, String, Boolean, Enum, MetaData
+from sqlalchemy import Table, Column, String, Boolean, Enum, MetaData, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 
 import uuid
 import enum
+
+from src.user.models import users
 
 metadata = MetaData()
 
@@ -39,5 +41,6 @@ notes = Table(
     Column('is_active', Boolean, default=True),
     Column('priority', Enum(Priority), default='Nothing'),
     Column('status', Enum(Status), default='Nothing'),
-    Column('complexity', Enum(Complexity), default='Nothing')
+    Column('complexity', Enum(Complexity), default='Nothing'),
+    Column('author', UUID, ForeignKey(users.c.id), nullable=False)
 )
