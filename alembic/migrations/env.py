@@ -8,18 +8,18 @@ from alembic import context
 import sys
 
 sys.path = ['', '..', '../..'] + sys.path[1:]
-from src.settings import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
+from src.settings import HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, PORT
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
 section = config.config_ini_section
-config.set_section_option(section, 'DB_HOST', DB_HOST)
-config.set_section_option(section, 'DB_NAME', DB_NAME)
-config.set_section_option(section, 'DB_USER', DB_USER)
-config.set_section_option(section, 'DB_PASS', DB_PASS)
-config.set_section_option(section, 'DB_PORT', DB_PORT)
+config.set_section_option(section, 'HOST', HOST)
+config.set_section_option(section, 'POSTGRES_DB', POSTGRES_DB)
+config.set_section_option(section, 'POSTGRES_USER', POSTGRES_USER)
+config.set_section_option(section, 'POSTGRES_PASSWORD', POSTGRES_PASSWORD)
+config.set_section_option(section, 'PORT', PORT)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

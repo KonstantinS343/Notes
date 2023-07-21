@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_fastapi
+    volumes:
+      - ./db:/var/postgresql/data/
+    env_file:
+      - ./src/.env
+
+  app:
+    build:
+      context: .
+    image: fastapi
+    container_name: fastapi_backend
+    command: sh -c "cd alembic/ &&
+                    alembic upgrade heads &&
+                    uvicorn src.main:app --reload --port 2000"
+    ports:
+      - "2000:2000"
+    env_file:
+      - ./src/.env
+    volumes:
+      - .:/notes
+    
+    depends_on:
+      - db
+
