@@ -1,12 +1,15 @@
-from sqlalchemy import Table, Column, String, Boolean, Enum, MetaData, ForeignKey
+from sqlalchemy import Column, String, Boolean, Enum, ForeignKey, TIMESTAMP
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.ext.declarative import declarative_base
 
 import uuid
 import enum
+from datetime import datetime
 
-from src.user.models import users
+from src.user.models import User
 
-metadata = MetaData()
+
+Base = declarative_base()
 
 
 class Priority(enum.Enum):
@@ -32,15 +35,15 @@ class Complexity(enum.Enum):
     extreme = 'Extreme'
 
 
-notes = Table(
-    'notes',
-    metadata,
-    Column('id', UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
-    Column('title', String, nullable=False),
-    Column('description', String, nullable=False),
-    Column('is_active', Boolean, default=True),
-    Column('priority', Enum(Priority), default='Nothing'),
-    Column('status', Enum(Status), default='Nothing'),
-    Column('complexity', Enum(Complexity), default='Nothing'),
-    Column('author', UUID, ForeignKey(users.c.id), nullable=False)
-)
+class Note(Base):
+    __tablename__ = 'notes'
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
+    priority = Column(Enum(Priority), default='Nothing')
+    status = Column(Enum(Status), default='Nothing')
+    complexity = Column(Enum(Complexity), default='Nothing')
+    author = Column(String, ForeignKey(User.username), nullable=False)
+    created_at = Column(TIMESTAMP, default=datetime.utcnow)

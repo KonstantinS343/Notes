@@ -1,5 +1,5 @@
 fastapi[all]
-SQLAlchemy
+sqlalchemy
 pydantic[email]
 asyncpg
 psycopg2-binary
