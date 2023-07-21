@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_fastapi
+    volumes:
+      - ./db:/var/postgresql/data/
+    env_file:
+      - ./src/.env
+
+  app:
+    build:
+      context: .
+    image: fastapi
+    container_name: fastapi_backend
+    command: sh -c "cd alembic/ &&
+                    alembic upgrade heads &&
+                    cd ../src &&
+                    uvicorn main:app --reload --host 0.0.0.0 --port 2000"
+    ports:
+      - "2000:2000"
+    env_file:
+      - ./src/.env
+    volumes:
+      - .:/notes
+    
+    depends_on:
+      - db
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+

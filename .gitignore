@@ -130,3 +130,5 @@ src/frontend/static/js/*
 *.sqlite
 
 staticfiles
+
+db/
