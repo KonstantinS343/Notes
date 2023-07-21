@@ -22,7 +22,7 @@ async def get_all_task(session: AsyncSession = Depends(get_db)) -> List[TaskResp
     response = await _get_active_tasks(session=session)
 
     if not response:
-        raise HTTPException(status_code=404, detail='No such task was found')
+        raise HTTPException(status_code=404, detail='No tasks')
 
     return response
 
