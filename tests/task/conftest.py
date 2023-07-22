@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import insert
 
+from src.settings import TEST_DB_URL
 from src.main import app
 from src.database import get_db
 from src.task.models import Base as TaskBase
@@ -22,7 +23,7 @@ TEST_NOTE_ID = [
     '6fa82f52-5717-4562-b3fc-2c963f66afa6'  # deleted
 ]
 
-engine = create_async_engine('postgresql+asyncpg://postgres:secret@localhost:5432/pytest_fastapi', echo=True)
+engine = create_async_engine(TEST_DB_URL, echo=True)
 async_sessioin_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 
