@@ -27,14 +27,14 @@ async def get_all_task(session: AsyncSession = Depends(get_db)) -> List[TaskResp
     return response
 
 
-@router.post('/', response_model=TaskResponse)
+@router.post('/', response_model=TaskResponse, status_code=201)
 async def create_new_task(create_scheme: TaskCreate, session: AsyncSession = Depends(get_db)) -> TaskResponse:
     response = await _create_new_task(create_scheme=create_scheme, session=session)
 
     return response
 
 
-@router.get('/{note_id}', response_model=List[TaskResponse])
+@router.get('/{note_id}/', response_model=List[TaskResponse])
 async def get_task_by_id(note_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> List[TaskResponse]:
     response = await _get_task_by_id(note_id=note_id, session=session)
 
@@ -44,7 +44,7 @@ async def get_task_by_id(note_id: uuid.UUID, session: AsyncSession = Depends(get
     return response
 
 
-@router.delete('/{note_id}', response_model=List[TaskDelete])
+@router.delete('/{note_id}/', response_model=List[TaskDelete])
 async def delete_task_by_id(note_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> List[TaskDelete]:
     response = await _delete_active_task(note_id=note_id, session=session)
 
@@ -54,7 +54,7 @@ async def delete_task_by_id(note_id: uuid.UUID, session: AsyncSession = Depends(
     return response
 
 
-@router.put('/{note_id}', response_model=List[TaskUpdate])
+@router.put('/{note_id}/', response_model=List[TaskUpdate])
 async def update_task_by_id(create_scheme: TaskCreate, note_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> List[TaskUpdate]:
     response = await _update_task(
         create_scheme=create_scheme,
@@ -68,7 +68,7 @@ async def update_task_by_id(create_scheme: TaskCreate, note_id: uuid.UUID, sessi
     return response
 
 
-@router.patch('/{note_id}', response_model=List[TaskUpdate])
+@router.patch('/{note_id}/', response_model=List[TaskUpdate])
 async def partial_update_task_by_id(create_scheme: TaskCreate, note_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> List[TaskUpdate]:
     response = await _partial_update_task(
         create_scheme=create_scheme,

@@ -6,4 +6,5 @@ exclude =
       frontend,
       .git,
       __pycache__,
-      venv
+      venv,
+      tests/task/api/test_create_data.py

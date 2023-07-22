@@ -8,8 +8,8 @@ POSTGRES_DB = os.environ.get('POSTGRES_DB')
 POSTGRES_USER = os.environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 PORT = os.environ.get('PORT')
-DB_TEST_NAME = os.environ.get('DB_TEST_NAME')
+POSTGRES_DB_TEST = os.environ.get('POSTGRES_DB_TEST')
 
 DB_URL = f'postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}:{PORT}/{POSTGRES_DB}'
 
-TEST_DB_URL = f'postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}:{PORT}/{DB_TEST_NAME}'
+TEST_DB_URL = f'postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}:{PORT}/{POSTGRES_DB_TEST}'
