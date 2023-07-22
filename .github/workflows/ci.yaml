@@ -65,6 +65,11 @@ jobs:
           . venv/bin/activate
           pip install --upgrade pip pip-tools
           pip-sync requirements.txt
+        env:
+          TEST_DB_URL: ${{ secrets.DB_URL }}
+          
+      - name: Print name
+        run: echo "ENV $TEST_DB_URL"
 
       - name: Run the tests
         env:
@@ -72,6 +77,3 @@ jobs:
         run: |
           . venv/bin/activate
           pytest -v ./
-          
-      - name: Print name
-        run: echo "ENV $TEST_DB_URL"
