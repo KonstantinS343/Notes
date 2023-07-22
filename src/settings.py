@@ -12,4 +12,4 @@ POSTGRES_DB_TEST = os.environ.get('POSTGRES_DB_TEST')
 
 DB_URL = f'postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}:{PORT}/{POSTGRES_DB}'
 
-TEST_DB_URL = f'postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}:{PORT}/{POSTGRES_DB_TEST}'
+TEST_DB_URL = os.environ.get('TEST_DB_URL')
