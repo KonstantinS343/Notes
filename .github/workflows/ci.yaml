@@ -68,7 +68,10 @@ jobs:
 
       - name: Run the tests
         env:
-          TEST_DB_URL: postgresql+asyncpg://postgres:secret@localhost:5432/pytest_fastapi
+          TEST_DB_URL: ${{ secrets.DB_URL }}
         run: |
           . venv/bin/activate
           pytest -v ./
+          
+      - name: Print name
+        run: echo "ENV $TEST_DB_URL"
