@@ -36,7 +36,7 @@ jobs:
           flake8 ./
     
   test:
-    needs: build
+    needs: lint
     runs-on: ubuntu-latest
 
     services:
