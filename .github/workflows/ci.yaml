@@ -68,7 +68,7 @@ jobs:
 
       - name: Run the tests
         env:
-          DATABASE_URL: postgres://postgres:secret@localhost:5432/pytest_fastapi
+          TEST_DB_URL: postgres://postgres:secret@localhost:5432/pytest_fastapi
         run: |
           . venv/bin/activate
-          pytest -v
+          pytest -v ./
