@@ -68,6 +68,7 @@ jobs:
 
       - name: Run the tests
         run: |
+          echo "ENV $TEST_DB_URL"
           . venv/bin/activate
           pytest -v ./
         env:
