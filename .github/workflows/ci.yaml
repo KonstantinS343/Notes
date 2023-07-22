@@ -71,5 +71,5 @@ jobs:
           . venv/bin/activate
           pytest -v ./
         env:
-          DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/pytest_fastapi'
-          TEST_DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/pytest_fastapi'
+          DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/postgres'
+          TEST_DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/postgres'
