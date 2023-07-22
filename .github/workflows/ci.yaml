@@ -18,11 +18,11 @@ jobs:
         id: setup-python
         with:
           python-version-file: '.python-version'
-        env:
-          TEST_DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/pytest_fastapi'
           
       - name: Print name
         run: echo "ENV $TEST_DB_URL"
+        env:
+          TEST_DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/pytest_fastapi'
 
       - name: Install flake
         run: pip install flake8
