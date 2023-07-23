@@ -6,11 +6,15 @@ from typing import AsyncGenerator
 from httpx import AsyncClient
 import asyncio
 
+from redis import asyncio as aioredis
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import insert
 
-from src.settings import TEST_DB_URL
+from src.settings import TEST_DB_URL, REDIS_HOST, REDIS_PORT
 from src.main import app
 from src.database import get_db
 from src.task.models import Base as TaskBase
@@ -39,6 +43,13 @@ def event_loop(request):
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
+
+
+@pytest.fixture(autouse=True)
+def redis_setup(request):
+    redis = aioredis.from_url(f'redis://{REDIS_HOST}:{REDIS_PORT}')
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    return True
 
 
 @pytest.fixture(scope='session', autouse=True)
