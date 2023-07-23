@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from fastapi_cache.decorator import cache
+
 import uuid
 from typing import List
 
@@ -18,6 +20,7 @@ router = APIRouter(
 
 
 @router.get('/', response_model=List[TaskResponse])
+@cache(expire=3600)
 async def get_all_task(session: AsyncSession = Depends(get_db)) -> List[TaskResponse]:
     response = await _get_active_tasks(session=session)
 
@@ -35,6 +38,7 @@ async def create_new_task(create_scheme: TaskCreate, session: AsyncSession = Dep
 
 
 @router.get('/{note_id}/', response_model=List[TaskResponse])
+@cache(expire=3600)
 async def get_task_by_id(note_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> List[TaskResponse]:
     response = await _get_task_by_id(note_id=note_id, session=session)
 

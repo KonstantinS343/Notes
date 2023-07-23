@@ -39,3 +39,8 @@ services:
     depends_on:
       - db
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6378:6379"
+

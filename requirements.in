@@ -6,3 +6,4 @@ psycopg2-binary
 alembic
 pytest
 pytest-asyncio
+fastapi-cache2[redis]
