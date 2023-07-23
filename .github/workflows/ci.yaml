@@ -40,7 +40,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13.9-alpine
+        image: postgres:latest
         env:
           POSTGRES_PASSWORD: secret
         options: >-
@@ -50,6 +50,11 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
 
     steps:
       - uses: actions/checkout@v3
@@ -71,5 +76,7 @@ jobs:
           . venv/bin/activate
           pytest -v ./
         env:
-          DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/postgres'
-          TEST_DB_URL: 'postgresql+asyncpg://postgres:secret@localhost:5432/postgres'
+          DB_URL: ${{ secrets.DB_URL }}
+          TEST_DB_URL: ${{ secrets.TEST_DB_URL }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
