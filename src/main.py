@@ -13,6 +13,7 @@ from src.settings import REDIS_HOST, REDIS_PORT
 from src.user.config import auth_backend
 from src.user.schemas import UserRead, UserCreate
 from src.user.config import fastapi_users
+from tasks.auth.router import router as celery_router
 
 
 app = FastAPI(title='Notes')
@@ -36,6 +37,8 @@ app.include_router(
     prefix="/auth",
     tags=["auth"],
 )
+
+app.include_router(celery_router)
 
 
 @app.on_event('startup')
