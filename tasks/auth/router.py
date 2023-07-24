@@ -8,8 +8,8 @@ router = APIRouter(prefix='/verify')
 
 
 @router.get('/')
-def verify_auth():
-    send_email_verify_message.delay(user=Depends(current_user))
+def verify_auth(user=Depends(current_user)):
+    send_email_verify_message.delay(user)
     return {
         'status': 200,
         'data': 'Письмо отправлено'

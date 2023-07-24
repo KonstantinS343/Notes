@@ -21,7 +21,7 @@ def email_template():
 
 
 @celery.task
-def send_email_verify_message():
+def send_email_verify_message(user: str):
     email = email_template()
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as email_server:
         email_server.login(SMTP_USER, SMTP_PASSWORD)
