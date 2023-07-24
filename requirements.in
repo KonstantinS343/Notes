@@ -7,3 +7,4 @@ alembic
 pytest
 pytest-asyncio
 fastapi-cache2[redis]
+fastapi-users[sqlalchemy]

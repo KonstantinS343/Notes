@@ -1,8 +1,8 @@
-"""declarative form
+"""init
 
-Revision ID: d07ac224cc99
-Revises: e63632cc4f8f
-Create Date: 2023-07-20 18:41:36.537567
+Revision ID: 693c0403cd7b
+Revises: feddd2d7db29
+Create Date: 2023-07-24 16:41:22.115060
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd07ac224cc99'
-down_revision = 'e63632cc4f8f'
+revision = '693c0403cd7b'
+down_revision = 'feddd2d7db29'
 branch_labels = None
 depends_on = None
 
