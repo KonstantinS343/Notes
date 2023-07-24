@@ -72,20 +72,17 @@ async def async_client() -> AsyncGenerator[AsyncClient, None]:
 @pytest.fixture(scope='function')
 async def create_user():
     async with async_sessioin_maker() as session:
-        stmt = insert(Role).values(id=1, name="admin", permissions=None)
-
-        await session.execute(stmt)
-        await session.commit()
-
         stmt = insert(User).values(
             id=uuid.UUID('3fa85f64-5717-4562-b3fc-2c963f66afa6'),
             username='admin',
             first_name='admin',
             email='admin@gmail.com',
             is_active=True,
-            password='admin',
+            is_superuser=False,
+            is_verified=False,
+            hashed_password='admin',
             registered_at=datetime.utcnow(),
-            roles_id=1
+            roles_id=Role.user
         )
 
         await session.execute(stmt)
