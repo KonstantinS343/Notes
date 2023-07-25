@@ -1,14 +1,15 @@
 import uuid
-from typing import Union, Optional
+from typing import Union, Optional, Any, Coroutine
 
 from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, UUIDIDMixin, InvalidPasswordException
+from fastapi_users import BaseUserManager, UUIDIDMixin, InvalidPasswordException, schemas, exceptions
 
 from src.user.models import User
 from src.user.utils import get_user_db
 from src.settings import SECRET
 from src.user.schemas import UserCreate
 from tasks.auth.email_verify import send_email_verify_message
+from src.user.utils import _get_user_by_username
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
@@ -29,16 +30,26 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
                 reason="Password should not contain e-mail"
             )
 
-    async def on_after_register(self, user: User, request: Optional[Request] = None):
-        send_email_verify_message.delay(user.email)
+    async def on_after_request_verify(
+        self, user: User, token: str, request: Optional[Request] = None
+    ):
+        send_email_verify_message.delay(user.email, token)
 
-    async def on_after_request_verify(self, user: User, token: str, request: Optional[Request] = None):
-        await self.verify(token=token, request=request)
+    async def on_after_register(self, user: User, request: Optional[Request] = None):
+        await self.request_verify(user, request)
 
     async def on_after_verify(
         self, user: User, request: Optional[Request] = None
     ):
         print(f"User {user.id} has been verified")
+
+    async def create(self, user_create: schemas.UC, safe: bool = False, request: Request | None = None) -> Coroutine[Any, Any, User]:
+        response = await _get_user_by_username(user_create.username)
+
+        if response:
+            raise exceptions.UserAlreadyExists()
+        else:
+            return await super().create(user_create, safe, request)
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):
