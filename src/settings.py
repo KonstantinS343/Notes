@@ -25,3 +25,6 @@ SMTP_USER = os.environ.get('SMTP_USER')
 SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD')
 
 DNS = os.environ.get('DNS')
+
+CELERY_HOST = os.environ.get('CELERY_HOST')
+CELERY_PORT = os.environ.get('CELERY_PORT')
