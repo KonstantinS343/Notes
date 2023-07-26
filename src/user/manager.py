@@ -9,6 +9,7 @@ from src.user.utils import get_user_db
 from src.settings import SECRET
 from src.user.schemas import UserCreate
 from tasks.auth.email_verify import send_email_verify_message
+from tasks.auth.reset_password import send_email_reset_password_message
 from src.user.utils import _get_user_by_username
 
 
@@ -50,6 +51,11 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
             raise exceptions.UserAlreadyExists()
         else:
             return await super().create(user_create, safe, request)
+
+    async def on_after_forgot_password(
+        self, user: User, token: str, request: Optional[Request] = None
+    ):
+        send_email_reset_password_message.delay(user.email, token)
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):

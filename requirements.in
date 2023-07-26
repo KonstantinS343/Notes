@@ -16,3 +16,5 @@ fastapi-users[sqlalchemy]
 
 celery
 flower
+
+python-multipart

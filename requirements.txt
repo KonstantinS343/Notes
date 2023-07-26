@@ -148,19 +148,20 @@ pytest==7.4.0
 pytest-asyncio==0.21.1
     # via -r requirements.in
 python-dateutil==2.8.2
-    # via
-    #   celery
-    #   pendulum
+    # via pendulum
 python-dotenv==1.0.0
     # via
     #   pydantic-settings
     #   uvicorn
 python-multipart==0.0.6
     # via
+    #   -r requirements.in
     #   fastapi
     #   fastapi-users
 pytz==2023.3
-    # via flower
+    # via
+    #   celery
+    #   flower
 pytzdata==2020.1
     # via pendulum
 pyyaml==6.0
@@ -194,8 +195,6 @@ typing-extensions==4.7.1
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
-tzdata==2023.3
-    # via celery
 ujson==5.8.0
     # via fastapi
 uvicorn[standard]==0.22.0
