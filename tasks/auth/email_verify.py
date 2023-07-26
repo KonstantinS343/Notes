@@ -3,7 +3,7 @@ import smtplib
 from email.message import EmailMessage
 
 from tasks.celery import celery
-from src.settings import SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD
+from src.settings import SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, DNS
 from .messages.email_verify_message import message
 
 
@@ -14,7 +14,7 @@ def email_template(user_email: str, token: str):
     email['To'] = user_email
 
     email.set_content(
-        message.format(token, token),
+        message.format(DNS, token, DNS, token),
         subtype='html'
     )
     return email
