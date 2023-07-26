@@ -6,6 +6,8 @@
 #
 alembic==1.11.1
     # via -r requirements.in
+amqp==5.1.1
+    # via kombu
 annotated-types==0.5.0
     # via pydantic
 anyio==3.7.1
@@ -19,6 +21,12 @@ asyncpg==0.28.0
     # via -r requirements.in
 bcrypt==4.0.1
     # via passlib
+billiard==3.6.4.0
+    # via celery
+celery==5.2.7
+    # via
+    #   -r requirements.in
+    #   flower
 certifi==2023.5.7
     # via
     #   httpcore
@@ -26,7 +34,18 @@ certifi==2023.5.7
 cffi==1.15.1
     # via cryptography
 click==8.1.5
-    # via uvicorn
+    # via
+    #   celery
+    #   click-didyoumean
+    #   click-plugins
+    #   click-repl
+    #   uvicorn
+click-didyoumean==0.3.0
+    # via celery
+click-plugins==1.1.1
+    # via celery
+click-repl==0.3.0
+    # via celery
 cryptography==41.0.2
     # via pyjwt
 dnspython==2.3.0
@@ -53,6 +72,8 @@ fastapi-users[sqlalchemy]==12.1.0
     #   fastapi-users-db-sqlalchemy
 fastapi-users-db-sqlalchemy==6.0.0
     # via fastapi-users
+flower==2.0.0
+    # via -r requirements.in
 greenlet==2.0.2
     # via sqlalchemy
 h11==0.14.0
@@ -65,6 +86,8 @@ httptools==0.6.0
     # via uvicorn
 httpx==0.24.1
     # via fastapi
+humanize==4.7.0
+    # via flower
 idna==3.4
     # via
     #   anyio
@@ -76,6 +99,8 @@ itsdangerous==2.1.2
     # via fastapi
 jinja2==3.1.2
     # via fastapi
+kombu==5.3.1
+    # via celery
 makefun==1.15.1
     # via fastapi-users
 mako==1.2.4
@@ -94,6 +119,10 @@ pendulum==2.1.2
     # via fastapi-cache2
 pluggy==1.2.0
     # via pytest
+prometheus-client==0.17.1
+    # via flower
+prompt-toolkit==3.0.39
+    # via click-repl
 psycopg2-binary==2.9.6
     # via -r requirements.in
 pycparser==2.21
@@ -126,8 +155,13 @@ python-dotenv==1.0.0
     #   uvicorn
 python-multipart==0.0.6
     # via
+    #   -r requirements.in
     #   fastapi
     #   fastapi-users
+pytz==2023.3
+    # via
+    #   celery
+    #   flower
 pytzdata==2020.1
     # via pendulum
 pyyaml==6.0
@@ -152,6 +186,8 @@ starlette==0.27.0
     # via fastapi
 tomli==2.0.1
     # via pytest
+tornado==6.3.2
+    # via flower
 typing-extensions==4.7.1
     # via
     #   alembic
@@ -167,7 +203,14 @@ uvicorn[standard]==0.22.0
     #   fastapi-cache2
 uvloop==0.17.0
     # via uvicorn
+vine==5.0.0
+    # via
+    #   amqp
+    #   celery
+    #   kombu
 watchfiles==0.19.0
     # via uvicorn
+wcwidth==0.2.6
+    # via prompt-toolkit
 websockets==11.0.3
     # via uvicorn

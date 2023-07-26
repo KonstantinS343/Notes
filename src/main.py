@@ -13,6 +13,7 @@ from src.settings import REDIS_HOST, REDIS_PORT
 from src.user.config import auth_backend
 from src.user.schemas import UserRead, UserCreate
 from src.user.config import fastapi_users
+from src.user.router import verify_router, reset_password_router
 
 
 app = FastAPI(title='Notes')
@@ -20,7 +21,7 @@ app = FastAPI(title='Notes')
 app.include_router(task_router)
 
 app.include_router(
-    fastapi_users.get_auth_router(auth_backend),
+    fastapi_users.get_auth_router(auth_backend, requires_verification=True),
     prefix="/auth/jwt",
     tags=["auth"],
 )
@@ -36,6 +37,9 @@ app.include_router(
     prefix="/auth",
     tags=["auth"],
 )
+
+app.include_router(verify_router)
+app.include_router(reset_password_router)
 
 
 @app.on_event('startup')
