@@ -18,3 +18,5 @@ celery
 flower
 
 python-multipart
+
+gunicorn

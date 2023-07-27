@@ -9,4 +9,6 @@ COPY ./requirements.txt /notes/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /notes/requirements.txt
 
-COPY . notes/
+COPY . .
+
+RUN chmod a+x scripts/*.sh
