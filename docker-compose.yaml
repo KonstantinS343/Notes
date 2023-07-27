@@ -14,12 +14,9 @@ services:
       context: .
     image: fastapi
     container_name: fastapi_backend
-    command: sh -c "cd alembic/ &&
-                    alembic upgrade heads &&
-                    cd ../src &&
-                    uvicorn main:app --reload --host 0.0.0.0 --port 2000"
+    command: ["/notes/scripts/app.sh"]
     ports:
-      - "2000:2000"
+      - "2000:8000"
     env_file:
       - ./src/.env
     volumes:
@@ -27,6 +24,7 @@ services:
     
     depends_on:
       - db
+      - redis
 
   pgadmin:
     container_name: pgadmin
@@ -41,6 +39,35 @@ services:
 
   redis:
     image: redis:latest
+    container_name: redis_app
     ports:
       - "6378:6379"
 
+  celery:
+    build:
+        context: .
+    command: ["/notes/scripts/celery.sh", "celery"]
+    env_file:
+      - ./src/.env
+    volumes:
+      - .:/notes
+    container_name: celery_app
+
+    depends_on:
+      - redis
+
+  flower:
+    build:
+        context: .
+    command: ["/notes/scripts/celery.sh", "flower"]
+    env_file:
+      - ./src/.env
+    volumes:
+      - .:/notes
+    container_name: flower_app
+    ports:
+      - "8888:5555"
+    
+    depends_on:
+      - redis
+      - celery
