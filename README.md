@@ -8,6 +8,7 @@ Also users can authenticate to access their personal notes and tasks.
 
 In the `src` folder we find the file 📜  `.env` and fill it in according to the template:
 
+```dosini
     HOST=db # The host of your database (locally localhost, and db in docker)
     POSTGRES_DB=postgres # Name of your database
     POSTGRES_USER=postgres # Password of your database
@@ -34,6 +35,7 @@ In the `src` folder we find the file 📜  `.env` and fill it in according to th
 
     CELERY_HOST=redis # Celery host for broker(locally localhost, and redis in docker)
     CELERY_PORT=6379/1 # Celery port
+```
 
 ## Project launch 🚀
 
