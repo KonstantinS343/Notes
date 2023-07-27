@@ -1,10 +1,12 @@
-# Notes and tasks
+# Notes and tasks 📒
 
-The project is a backend for a system for taking notes and tasks. It provides a RESTful API through which users can create, view, update and delete notes and tasks. Also users can authenticate to access their personal notes and tasks.
+The project is a backend for a system for taking notes and tasks. It provides a RESTful API through which users can create ⬆️, view ▶️, update 🔄 and delete ⬇️ notes and tasks.
 
-## Setting environment variables
+Also users can authenticate to access their personal notes and tasks.
 
-In the src folder we find the file  `.env` and fill it in according to the template:
+## Setting environment variables 📌
+
+In the `src` folder we find the file 📜  `.env` and fill it in according to the template:
 
     HOST=db # The host of your database (locally localhost, and db in docker)
     POSTGRES_DB=postgres # Name of your database
@@ -33,8 +35,21 @@ In the src folder we find the file  `.env` and fill it in according to the templ
     CELERY_HOST=redis # Celery host for broker(locally localhost, and redis in docker)
     CELERY_PORT=6379/1 # Celery port
 
-## Project launch
+## Project launch 🚀
 
 In the root of the project, run:
 
     docker compose up
+
+## Tech used ⚙️
+
+- [FastAPI](https://fastapi.tiangolo.com/) ⚡
+- [Redis](https://redis.io/)  🚀
+- [PostgreSQL](https://www.postgresql.org/)  🐘
+- [SQLAlchemy](https://www.sqlalchemy.org/)  🧪
+- [Celery](https://docs.celeryq.dev/en/stable/) 🖥
+- [Pydantic](https://docs.pydantic.dev/latest/) 🔍
+- [Alembic](https://alembic.sqlalchemy.org/en/latest/) ⚗️
+- [FastAPI Users](https://fastapi-users.github.io/fastapi-users/12.1/) 👦🏼
+- [Pytest](https://docs.pytest.org/en/7.4.x/) 🩺
+- [Docker](https://www.docker.com/) 📦
