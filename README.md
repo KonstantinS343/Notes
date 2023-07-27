@@ -1,6 +1,7 @@
 # Notes and tasks 📒
 
-[![Tests](https://github.com/KonstantinS343/Notes/actions/workflows/ci.yml/badge.svg)](https://github.com/KonstantinS343/Notes/actions/workflows/ci.yml)
+[![Tests](https://github.com/KonstantinS343/Notes/actions/workflows/ci.yaml/badge.svg)](https://github.com/KonstantinS343/Notes/actions/workflows/ci.yaml)
+
 
 The project is a backend for a system for taking notes and tasks. It provides a RESTful API through which users can create ⬆️, view ▶️, update 🔄 and delete ⬇️ notes and tasks.
 
