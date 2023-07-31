@@ -57,3 +57,4 @@ app.add_middleware(
 async def startup_event():
     redis = aioredis.from_url(f'redis://{REDIS_HOST}:{REDIS_PORT}')
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    await FastAPICache.clear()

@@ -16,22 +16,22 @@ async def _execute_get_request(query, session: AsyncSession) -> Union[TaskRespon
     return result
 
 
-async def _get_active_tasks(session: AsyncSession) -> Union[TaskResponse, None]:
-    query = select(Note).where(Note.is_active == True)
+async def _get_active_tasks(session: AsyncSession, username: str) -> Union[TaskResponse, None]:
+    query = select(Note).where(and_(Note.is_active == True, Note.author == username))
 
     return await _execute_get_request(query, session)
 
 
-async def _get_task_by_id(note_id: uuid.UUID, session: AsyncSession) -> Union[TaskResponse, None]:
-    query = select(Note).where(and_(Note.id == note_id, Note.is_active == True))
+async def _get_task_by_id(note_id: uuid.UUID, session: AsyncSession, username: str) -> Union[TaskResponse, None]:
+    query = select(Note).where(and_(Note.id == note_id, Note.is_active == True, Note.author == username))
 
     return await _execute_get_request(query, session)
 
 
-async def _delete_active_task(note_id: uuid.UUID, session: AsyncSession) -> Union[TaskDelete, None]:
+async def _delete_active_task(note_id: uuid.UUID, session: AsyncSession, username: str) -> Union[TaskDelete, None]:
     query = (
         update(Note)
-        .where(and_(Note.id == note_id, Note.is_active == True))
+        .where(and_(Note.id == note_id, Note.is_active == True, Note.author == username))
         .values(is_active=False)
         .returning(Note.id, Note.is_active)
     )
@@ -52,11 +52,11 @@ async def _create_new_task(create_scheme: TaskCreate, session: AsyncSession) -> 
     return new_task
 
 
-async def _update_task(create_scheme: TaskCreate, note_id: uuid.UUID, session: AsyncSession) -> Union[TaskUpdate, None]:
+async def _update_task(create_scheme: TaskCreate, note_id: uuid.UUID, session: AsyncSession, username: str) -> Union[TaskUpdate, None]:
     create_scheme = create_scheme.dict()
     query = (
         update(Note)
-        .where(and_(Note.id == note_id, Note.is_active == True))
+        .where(and_(Note.id == note_id, Note.is_active == True, Note.author == username))
         .values(create_scheme)
         .returning(
             Note.id,
@@ -78,12 +78,11 @@ async def _update_task(create_scheme: TaskCreate, note_id: uuid.UUID, session: A
     return result
 
 
-async def _partial_update_task(create_scheme: TaskCreate, note_id: uuid.UUID, session: AsyncSession) -> Union[TaskResponse, None]:
+async def _partial_update_task(create_scheme: TaskCreate, note_id: uuid.UUID, session: AsyncSession, username: str) -> Union[TaskResponse, None]:
     user_data = create_scheme.dict(exclude_defaults=True)
-    print(user_data)
     query = (
         update(Note)
-        .where(and_(Note.id == note_id, Note.is_active == True))
+        .where(and_(Note.id == note_id, Note.is_active == True, Note.author == username))
         .values(user_data)
         .returning(
             Note.id,

@@ -9,6 +9,7 @@ import asyncio
 from redis import asyncio as aioredis
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
+from fastapi_users.password import PasswordHelper
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
@@ -21,6 +22,7 @@ from src.task.models import Base as TaskBase
 from src.user.models import Base as UserBase
 from src.task.models import Note, Priority, Status, Complexity
 from src.user.models import User, Role
+
 
 TEST_NOTE_ID = [
     '3fa82f64-5717-4562-b3fc-2c963f66afa6',
@@ -79,8 +81,8 @@ async def create_user():
             email='admin@gmail.com',
             is_active=True,
             is_superuser=False,
-            is_verified=False,
-            hashed_password='admin',
+            is_verified=True,
+            hashed_password=PasswordHelper().hash('admin'),
             registered_at=datetime.utcnow(),
             roles_id=Role.user
         )
@@ -90,7 +92,7 @@ async def create_user():
 
 
 @pytest.fixture(scope='function')
-async def create_task(create_user):
+async def create_task():
     async with async_sessioin_maker() as session:
         for i in TEST_NOTE_ID:
             stmt = insert(Note).values(
