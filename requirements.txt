@@ -59,7 +59,7 @@ exceptiongroup==1.1.2
     # via
     #   anyio
     #   pytest
-fastapi[all]==0.100.0
+fastapi[all]==0.100.1
     # via
     #   -r requirements.in
     #   fastapi-cache2
