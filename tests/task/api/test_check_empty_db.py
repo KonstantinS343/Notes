@@ -2,7 +2,7 @@ from httpx import AsyncClient
 
 
 async def test_get_all_tasks_empty(async_client: AsyncClient, create_user):
-    response = await async_client.post('/auth/jwt/login', data={
+    response = await async_client.post('/auth/jwt/login', json={
         "username": "admin@gmail.com",
         "password": "admin"
     })
