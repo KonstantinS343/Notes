@@ -80,3 +80,4 @@ jobs:
           TEST_DB_URL: ${{ secrets.TEST_DB_URL }}
           REDIS_HOST: ${{ secrets.REDIS_HOST }}
           REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          SECRET: ${{ secrets.SECRET }}
