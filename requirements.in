@@ -9,6 +9,7 @@ alembic
 
 pytest
 pytest-asyncio
+pytest-mock
 
 fastapi-cache2[redis]
 
