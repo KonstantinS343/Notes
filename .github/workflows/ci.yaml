@@ -81,3 +81,5 @@ jobs:
           REDIS_HOST: ${{ secrets.REDIS_HOST }}
           REDIS_PORT: ${{ secrets.REDIS_PORT }}
           SECRET: ${{ secrets.SECRET }}
+          CELERY_HOST: ${{ secrets.CELERY_HOST }}
+          CELERY_PORT: ${{ secrets.CELERY_PORT }}
