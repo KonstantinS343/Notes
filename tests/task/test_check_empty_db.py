@@ -11,4 +11,4 @@ async def test_get_all_tasks_empty(async_client: AsyncClient, create_user):
 
     response = await async_client.get('/api/v1/task/', cookies={'note': cookies})
 
-    assert response.status_code == 404
+    assert response.status_code == 200

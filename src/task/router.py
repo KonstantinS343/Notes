@@ -27,7 +27,7 @@ async def get_all_task(session: AsyncSession = Depends(get_db), user: User = Dep
     response = await _get_active_tasks(session=session, username=user.username)
 
     if not response:
-        raise HTTPException(status_code=404, detail='No tasks')
+        raise HTTPException(status_code=200, detail='No tasks')
 
     return response
 

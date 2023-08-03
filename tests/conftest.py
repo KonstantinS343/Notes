@@ -25,7 +25,7 @@ from src.user.models import User, Role
 
 
 TEST_NOTE_ID = [
-    '3fa82f64-5717-4562-b3fc-2c963f66afa6',
+    '3fa82f64-9067-2345-b3fc-2c345f66afa6',
     '6fa82f52-5717-4562-b3fc-2c963f66afa6'  # deleted
 ]
 
