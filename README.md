@@ -8,6 +8,18 @@ The project is a backend for a system for taking notes and tasks. It provides a 
 
 Also users can authenticate to access their personal notes and tasks.
 
+## Description
+
+ - **Users**
+   
+   When registering users, a confirmation email will be sent to the email address specified in the request. Without confirmation, the user **cannot log into his account.**
+   The password reset functionality is also implemented, after executing the request, an email with a form for updating the password will be sent to the specified email.
+
+- **Tasks**
+
+  Only an authorized user gets access to tasks and notes.
+  When creating or changing tasks, you can specify not only yourself, but also other users. This means that when you create a task for another user, you will lose access to this task, and another user will have it
+
 ## Setting environment variables 📌
 
 In the `src` folder we find the file 📜  `.env` and fill it in according to the template:
