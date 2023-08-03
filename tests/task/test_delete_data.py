@@ -1,6 +1,6 @@
 from httpx import AsyncClient
 
-from tests.task.conftest import TEST_NOTE_ID
+from tests.conftest import TEST_NOTE_ID
 
 
 async def test_delete_task_by_id(async_client: AsyncClient):

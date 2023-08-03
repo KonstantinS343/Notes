@@ -1,6 +1,6 @@
 from httpx import AsyncClient
 
-from tests.task.conftest import TEST_NOTE_ID
+from tests.conftest import TEST_NOTE_ID
 
 
 async def test_create_new_task(create_task, async_client: AsyncClient):
@@ -10,7 +10,7 @@ async def test_create_new_task(create_task, async_client: AsyncClient):
     })
 
     cookies = response.cookies.get('note')
-    
+
     response = await async_client.post('/api/v1/task/', json={
         "title": "New",
         "description": "New",

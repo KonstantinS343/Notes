@@ -7,4 +7,4 @@ exclude =
       .git,
       __pycache__,
       venv,
-      tests/task/api/test_create_data.py
+      tests/task/test_create_data.py

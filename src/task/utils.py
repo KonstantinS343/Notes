@@ -2,11 +2,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import select, update, and_
 
+from fastapi import HTTPException
+
 import uuid
 from typing import Union
 
 from src.task.models import Note
 from .schemas import TaskCreate, TaskResponse, TaskDelete, TaskUpdate
+from src.user.models import User
 
 
 async def _execute_get_request(query, session: AsyncSession) -> Union[TaskResponse, None]:
@@ -44,6 +47,16 @@ async def _delete_active_task(note_id: uuid.UUID, session: AsyncSession, usernam
 
 
 async def _create_new_task(create_scheme: TaskCreate, session: AsyncSession) -> Union[TaskResponse, None]:
+    query = (
+        select(User)
+        .where(User.username == create_scheme.dict()['author'])
+    )
+
+    response = await _execute_get_request(query, session)
+
+    if not response:
+        raise HTTPException(status_code=400, detail='There is no such user')
+
     new_task = Note(**create_scheme.dict())
 
     session.add(new_task)
@@ -94,7 +107,7 @@ async def _partial_update_task(create_scheme: TaskCreate, note_id: uuid.UUID, se
             Note.complexity,
             Note.author)
     )
-    print(query)
+
     try:
         result = await session.execute(query)
         result = result.all()
