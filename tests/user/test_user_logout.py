@@ -1,7 +1,7 @@
 from httpx import AsyncClient
 
 
-async def test_login_user(async_client: AsyncClient):
+async def test_logout_user(async_client: AsyncClient):
     response = await async_client.post('/auth/jwt/login', data={
         "username": "adminuser@gmail.com",
         "password": "adminuser"
