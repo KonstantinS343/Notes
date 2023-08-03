@@ -79,8 +79,8 @@ jobs:
           REDIS_HOST: ${{ secrets.REDIS_HOST }}
           REDIS_PORT: ${{ secrets.REDIS_PORT }}
           SECRET: ${{ secrets.SECRET }}
-          CELERY_HOST: redis
-          CELERY_PORT: 6379/1
+          CELERY_HOST: 'redis'
+          CELERY_PORT: '6379/1'
 
       - name: Run the tests
         run: |
