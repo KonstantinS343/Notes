@@ -10,6 +10,7 @@ from src.settings import SECRET
 from src.user.schemas import UserCreate
 from tasks.auth.email_verify import send_email_verify_message
 from tasks.auth.reset_password import send_email_reset_password_message
+from tasks.auth.delete_notification import send_email_delete_notification
 from src.user.utils import _get_user_by_username
 
 
@@ -56,6 +57,9 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         self, user: User, token: str, request: Optional[Request] = None
     ):
         send_email_reset_password_message.delay(user.email, token)
+
+    async def on_after_delete(self, user: User, request: Optional[Request] = None):
+        send_email_delete_notification.delay(user.email)
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):

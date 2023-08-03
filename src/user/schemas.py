@@ -20,7 +20,5 @@ class UserCreate(schemas.BaseUserCreate):
 
 
 class UserUpdate(schemas.BaseUserUpdate):
-    username: str
     first_name: str
     second_name: str
-    roles_id: Role
