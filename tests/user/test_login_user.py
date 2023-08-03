@@ -7,7 +7,7 @@ async def test_login_user(async_client: AsyncClient):
         "password": "adminuser"
     })
 
-    assert response.content == 204
+    assert response.status_code == 204
 
     cookies = response.cookies.get('note')
 
