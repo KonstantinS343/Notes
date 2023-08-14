@@ -72,7 +72,7 @@ fastapi-users[sqlalchemy]==12.1.0
     #   fastapi-users-db-sqlalchemy
 fastapi-users-db-sqlalchemy==6.0.0
     # via fastapi-users
-flower==2.0.0
+flower==2.0.1
     # via -r requirements.in
 greenlet==2.0.2
     # via sqlalchemy
