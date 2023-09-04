@@ -145,7 +145,7 @@ pydantic-settings==2.0.1
     # via fastapi
 pyjwt[crypto]==2.7.0
     # via fastapi-users
-pytest==7.4.0
+pytest==7.4.1
     # via
     #   -r requirements.in
     #   pytest-asyncio
