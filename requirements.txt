@@ -127,7 +127,7 @@ prometheus-client==0.17.1
     # via flower
 prompt-toolkit==3.0.39
     # via click-repl
-psycopg2-binary==2.9.6
+psycopg2-binary==2.9.8
     # via -r requirements.in
 pycparser==2.21
     # via cffi
