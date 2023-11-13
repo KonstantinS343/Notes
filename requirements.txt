@@ -21,9 +21,9 @@ asyncpg==0.28.0
     # via -r requirements.in
 bcrypt==4.0.1
     # via passlib
-billiard==4.1.0
+billiard==4.2.0
     # via celery
-celery==5.3.1
+celery==5.3.5
     # via
     #   -r requirements.in
     #   flower
@@ -101,7 +101,7 @@ itsdangerous==2.1.2
     # via fastapi
 jinja2==3.1.2
     # via fastapi
-kombu==5.3.1
+kombu==5.3.3
     # via celery
 makefun==1.15.1
     # via fastapi-users
@@ -118,7 +118,9 @@ packaging==23.1
     #   gunicorn
     #   pytest
 passlib[bcrypt]==1.7.4
-    # via fastapi-users
+    # via
+    #   fastapi-users
+    #   passlib
 pendulum==2.1.2
     # via fastapi-cache2
 pluggy==1.2.0
@@ -144,7 +146,9 @@ pydantic-extra-types==2.0.0
 pydantic-settings==2.0.1
     # via fastapi
 pyjwt[crypto]==2.7.0
-    # via fastapi-users
+    # via
+    #   fastapi-users
+    #   pyjwt
 pytest==7.4.0
     # via
     #   -r requirements.in
@@ -210,9 +214,10 @@ uvicorn[standard]==0.22.0
     # via
     #   fastapi
     #   fastapi-cache2
+    #   uvicorn
 uvloop==0.17.0
     # via uvicorn
-vine==5.0.0
+vine==5.1.0
     # via
     #   amqp
     #   celery
