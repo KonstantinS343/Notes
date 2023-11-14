@@ -118,7 +118,9 @@ packaging==23.1
     #   gunicorn
     #   pytest
 passlib[bcrypt]==1.7.4
-    # via fastapi-users
+    # via
+    #   fastapi-users
+    #   passlib
 pendulum==2.1.2
     # via fastapi-cache2
 pluggy==1.2.0
@@ -131,20 +133,23 @@ psycopg2-binary==2.9.6
     # via -r requirements.in
 pycparser==2.21
     # via cffi
-pydantic[email]==2.1.1
+pydantic[email]==2.5.0
     # via
     #   -r requirements.in
     #   fastapi
+    #   pydantic
     #   pydantic-extra-types
     #   pydantic-settings
-pydantic-core==2.4.0
+pydantic-core==2.14.1
     # via pydantic
 pydantic-extra-types==2.0.0
     # via fastapi
 pydantic-settings==2.0.1
     # via fastapi
 pyjwt[crypto]==2.7.0
-    # via fastapi-users
+    # via
+    #   fastapi-users
+    #   pyjwt
 pytest==7.4.0
     # via
     #   -r requirements.in
@@ -210,6 +215,7 @@ uvicorn[standard]==0.22.0
     # via
     #   fastapi
     #   fastapi-cache2
+    #   uvicorn
 uvloop==0.17.0
     # via uvicorn
 vine==5.0.0
